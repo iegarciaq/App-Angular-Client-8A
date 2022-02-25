@@ -5,6 +5,10 @@ import { RegisterComponent } from './auth/register/register.component';
 
 const routes: Routes = [
   {
+    path: 'dashboard',
+    loadChildren: () => import('./dashboard/dashboard.module').then(modulo => modulo.DashboardModule)
+  },
+  {
     path: 'login',
     component: LoginComponent
   },

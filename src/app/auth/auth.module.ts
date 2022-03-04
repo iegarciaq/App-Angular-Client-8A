@@ -11,7 +11,7 @@ import { RegisterComponent } from './register/register.component';
     RegisterComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
   ],
   exports: [
     LoginComponent,

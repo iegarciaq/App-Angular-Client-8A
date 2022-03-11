@@ -3,14 +3,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Product } from '../../interfaces/product.interface';
+import { ProductService } from '../../services/product.service';
 
-
-const ELEMENT_DATA: Product[] = [
-  {id: 1, title: "Laptop", price: 5682.40, createdAt: "04-03-2022", updatedAt: "04-03-2022"},
-  {id: 2, title: "Smart TV", price: 10200.00, createdAt: "04-03-2022", updatedAt: "04-03-2022"},
-  {id: 3, title: "USB 32Gb", price: 120.00, createdAt: "04-03-2022", updatedAt: "04-03-2022"},
-  {id: 4, title: "Mouse Gamer", price: 399.99, createdAt: "04-03-2022", updatedAt: "04-03-2022"},
-];
 
 @Component({
   selector: 'app-table',
@@ -19,8 +13,10 @@ const ELEMENT_DATA: Product[] = [
 })
 export class TableComponent implements OnInit {
 
-  displayedColumns: string[] = ['id', 'title', 'price', 'createdAt', 'updatedAt'];
-  dataSource = new MatTableDataSource(ELEMENT_DATA);
+  allProducts : Product[] = [];
+
+  displayedColumns: string[] = ['id', 'title', 'price', 'createdAt', 'updatedAt', 'actions'];
+  dataSource = new MatTableDataSource(this.allProducts);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -35,9 +31,26 @@ export class TableComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  constructor() { }
+  constructor( private prodService: ProductService ) { }
   
-  ngOnInit(): void {
+  ngOnInit(){
+    this.loadTable();
+  }
+  
+  loadTable(){
+    this.prodService.getAllProduct().subscribe( data => {
+      console.log(data)
+      this.allProducts = data;
+      console.log(this.allProducts)
+    });
+
+    
+    console.log(this.allProducts)
+  }
+
+
+  addProduct(){
+    
   }
 
 }

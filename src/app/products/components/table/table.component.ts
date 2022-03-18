@@ -14,16 +14,15 @@ import { ProductService } from '../../services/product.service';
 export class TableComponent implements OnInit {
 
   allProducts : Product[] = [];
+  dataSource!: MatTableDataSource<Product>;
 
   displayedColumns: string[] = ['id', 'title', 'price', 'createdAt', 'updatedAt', 'actions'];
-  dataSource = new MatTableDataSource(this.allProducts);
-
+  
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
   ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+    
   }
 
   applyFilter(event: Event) {
@@ -37,11 +36,14 @@ export class TableComponent implements OnInit {
     this.loadTable();
   }
   
+
+  // Carga los datos del API 
   loadTable(){
     this.prodService.getAllProduct().subscribe( data => {
-      console.log(data)
       this.allProducts = data;
-      console.log(this.allProducts)
+      this.dataSource = new MatTableDataSource(this.allProducts);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
     });
 
     

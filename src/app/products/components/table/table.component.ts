@@ -1,9 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Product } from '../../interfaces/product.interface';
 import { ProductService } from '../../services/product.service';
+import { AddDialogComponent } from '../add-dialog/add-dialog.component';
 
 
 @Component({
@@ -20,17 +22,17 @@ export class TableComponent implements OnInit {
   
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-
-  ngAfterViewInit() {
-    
-  }
-
+  
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  constructor( private prodService: ProductService ) { }
+  constructor( 
+    private prodService: ProductService, 
+    private dialog: MatDialog 
+    
+    ) { }
   
   ngOnInit(){
     this.loadTable();
@@ -47,12 +49,11 @@ export class TableComponent implements OnInit {
     });
 
     
-    console.log(this.allProducts)
   }
 
 
   addProduct(){
-    
+    const dialogRef = this.dialog.open(AddDialogComponent);
   }
 
 }

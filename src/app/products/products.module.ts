@@ -5,16 +5,21 @@ import { ProductsRoutingModule } from './products-routing.module';
 import { OverviewProductsComponent } from './pages/overview-products/overview-products.component';
 import { TableComponent } from './components/table/table.component';
 import { MaterialComponentsModule } from '../material-components.module';
+import { AddDialogComponent } from './components/add-dialog/add-dialog.component';
+
+import { ReactiveFormsModule } from "@angular/forms";
 
 @NgModule({
   declarations: [
     OverviewProductsComponent,
-    TableComponent
+    TableComponent,
+    AddDialogComponent
   ],
   imports: [
     CommonModule,
     ProductsRoutingModule,
-    MaterialComponentsModule
+    MaterialComponentsModule,
+    ReactiveFormsModule
   ]
 })
 export class ProductsModule { }

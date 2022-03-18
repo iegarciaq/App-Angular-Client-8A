@@ -1,0 +1,36 @@
+<h1 mat-dialog-title>Add Product</h1>
+
+<mat-dialog-content class="mat-typography">
+  <form [formGroup]="formGroup" (ngSubmit)="submitForm()">
+    <!-- Inputs -->
+    <mat-form-field color="accent" class="setFullWidth">
+      <mat-label>Product's Title</mat-label>
+      <input
+        formControlName="title"
+        placeholder="Name"
+        matInput
+        autocomplete="off"
+        required
+      />
+      <mat-error>This field cannot be empty</mat-error>
+    </mat-form-field>
+    <mat-form-field color="accent" class="setFullWidth">
+        <mat-label>Product's Price</mat-label>
+        <input
+        formControlName="price"
+        type="number"
+        placeholder="0.0"
+        matInput
+        autocomplete="off"
+        required
+        />
+        <mat-error>This field cannot be empty</mat-error>
+    </mat-form-field>
+    <!-- Buttons -->
+    <div class="setRight">
+      <button type="submit" mat-raised-button color="primary" [disabled]="!formGroup.valid">
+        Save
+      </button>
+    </div>
+  </form>
+</mat-dialog-content>

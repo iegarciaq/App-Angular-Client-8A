@@ -53,7 +53,43 @@ export class TableComponent implements OnInit {
 
 
   addProduct(){
-    const dialogRef = this.dialog.open(AddDialogComponent);
+    const dialogRef = this.dialog.open(AddDialogComponent, {
+      data: {
+        action: 'add'
+      }
+    });
+
+    dialogRef.afterClosed().subscribe( result => {
+      // Aqui va el codigo que se va a ejecutar cada que el dialog
+      // se cierre
+
+      this.loadTable();
+    } );
+  }
+  
+  
+  deleteProduct(id: number){
+    // Llamar al servicio para eliminar el prod
+    this.prodService.deleteProduct(id).subscribe( resp => {
+      this.loadTable();
+    } );
+  }
+  
+  updateProduct(product: Product){
+    const dialogRef = this.dialog.open(AddDialogComponent, {
+      data: {
+        action: 'update',
+        product: product
+      }
+    });
+
+    dialogRef.afterClosed().subscribe( result => {
+      // Aqui va el codigo que se va a ejecutar cada que el dialog
+      // se cierre
+
+      this.loadTable();
+    } );
+    
   }
 
 }

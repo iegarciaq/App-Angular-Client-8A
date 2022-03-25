@@ -1,6 +1,6 @@
 <mat-form-field appearance="standard">
   <mat-label>Buscar</mat-label>
-  <input matInput (keyup)="applyFilter($event)" placeholder="Buscar producto..." #input autocomplete="off">
+  <input color="accent" matInput (keyup)="applyFilter($event)" placeholder="Buscar producto..." #input autocomplete="off">
 </mat-form-field>
 
 <div class="mat-elevation-z8">
@@ -52,11 +52,11 @@
             <mat-icon>remove_red_eye</mat-icon>
             <span>Ver</span>
           </button>
-          <button mat-menu-item>
+          <button (click)="updateProduct(element)" mat-menu-item>
             <mat-icon>edit</mat-icon>
             <span>Editar</span>
           </button>
-          <button mat-menu-item>
+          <button (click)="deleteProduct(element.id)" mat-menu-item>
             <mat-icon>delete</mat-icon>
             <span>Eliminar</span>
           </button>

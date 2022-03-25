@@ -18,4 +18,14 @@ export class ProductService {
    getAllProduct() : Observable<Product[]> {
     return this.http.get<Product[]>('http://localhost:5000/products');
    }
+
+   deleteProduct(id: number){
+     return this.http.delete(`http://localhost:5000/products/${id}`);  
+    }
+    
+    updateProduct(product: Product){
+
+     return this.http.put(`http://localhost:5000/products/${product.id}`, product);  
+
+   }
 }

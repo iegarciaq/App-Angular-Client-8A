@@ -1,4 +1,4 @@
-<h1 mat-dialog-title>Add Product</h1>
+<h1 mat-dialog-title> {{ action === 'add' ? 'Add Product' : 'Edit Product' }} </h1>
 
 <mat-dialog-content class="mat-typography">
   <form [formGroup]="formGroup" (ngSubmit)="submitForm()">
@@ -29,7 +29,7 @@
     <!-- Buttons -->
     <div class="setRight">
       <button type="submit" mat-raised-button color="primary" [disabled]="!formGroup.valid">
-        Save
+        {{ action === 'add' ? 'Save' : 'Update' }}
       </button>
     </div>
   </form>
